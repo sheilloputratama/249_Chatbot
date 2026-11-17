@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sheillo AI — Luxury Concierge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Latar Belakang Cahaya Ambient Mewah -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+
+    <div class="chat-container">
+        <!-- Header Eksklusif -->
+        <header class="chat-header">
+            <div class="brand-info">
+                <div class="ai-emblem">✦</div>
+                <div>
+                    <h1>sheillo AI</h1>
+                    <div class="status-text">
+                        <span class="status-dot"></span> Online • Private Session
+                    </div>
+                </div>
+            </div>
+            <button type="button" id="clear-btn" class="clear-btn" title="Mulai sesi baru">
+                Sesi Baru
+            </button>
+        </header>
+
+        <!-- Area Percakapan -->
+        <main id="chat-box" class="chat-box">
+            <div class="message bot">
+                <div class="message-meta">Atelier AI &bull; Baru saja</div>
+                <div class="message-content">Selamat datang di ruang eksklusif Anda. Apa yang ingin kita eksplorasi atau ciptakan hari ini?</div>
+            </div>
+
+            <!-- Pilihan Prompt Cepat -->
+            <div class="quick-prompts" id="quick-prompts">
+                <button type="button" class="prompt-chip">✨ Rancang strategi & ide kreatif</button>
+                <button type="button" class="prompt-chip">🖋️ Kurasi & perhalus gaya bahasa</button>
+                <button type="button" class="prompt-chip">📊 Analisis mendalam & ringkasan</button>
+            </div>
+        </main>
+
+        <!-- Area Input Modern -->
+        <form id="chat-form" class="chat-form">
+            <div class="input-wrapper">
+                <input
+                    type="text"
+                    id="user-input"
+                    placeholder="Ketik instruksi atau pertanyaan Anda..."
+                    autocomplete="off"
+                    required
+                >
+                <button type="submit" id="send-btn" aria-label="Kirim pesan">
+                    <span class="btn-text">Kirim</span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
