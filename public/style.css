@@ -1,0 +1,461 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap");
+
+:root {
+    --bg-deep: #0c0c0e;
+    --surface-glass: rgba(22, 22, 26, 0.75);
+    --surface-solid: #18181c;
+    --surface-hover: #222228;
+    --ink-primary: #f4f4f6;
+    --ink-secondary: #9e9ea6;
+    --ink-muted: #62626a;
+    --accent-gold: #dfb15b;
+    --accent-gold-glow: rgba(223, 177, 91, 0.15);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-gold: rgba(223, 177, 91, 0.3);
+    --shadow-luxury: 0 30px 80px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--ink-primary);
+    background-color: var(--bg-deep);
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Efek Cahaya Ambient Mewah di Background */
+.ambient-glow {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.glow-1 {
+    top: -10%;
+    left: -10%;
+    background: rgba(223, 177, 91, 0.07);
+}
+
+.glow-2 {
+    bottom: -10%;
+    right: -10%;
+    background: rgba(80, 80, 120, 0.08);
+}
+
+/* ===== Container Utama (Glassmorphism) ===== */
+.chat-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 780px;
+    height: 100%;
+    max-height: 860px;
+    background: var(--surface-glass);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-luxury);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* ===== Header Elegan ===== */
+.chat-header {
+    padding: 22px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(18, 18, 22, 0.5);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.brand-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.ai-emblem {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2a2a30, #151518);
+    color: var(--accent-gold);
+    border: 1px solid var(--border-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.chat-header h1 {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--ink-primary);
+}
+
+.status-text {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--ink-secondary);
+    margin-top: 3px;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #34d399;
+    box-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
+}
+
+.clear-btn {
+    padding: 8px 18px;
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--ink-secondary);
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clear-btn:hover {
+    color: var(--ink-primary);
+    background: var(--surface-hover);
+    border-color: var(--border-gold);
+}
+
+/* ===== Area Chat ===== */
+.chat-box {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    scroll-behavior: smooth;
+}
+
+.chat-box::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chat-box::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+}
+
+.chat-box::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== Gelembung Pesan ===== */
+.message {
+    display: flex;
+    flex-direction: column;
+    max-width: 82%;
+    animation: fadeSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.message.bot {
+    align-self: flex-start;
+}
+
+.message.user {
+    align-self: flex-end;
+}
+
+.message-meta {
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+    padding: 0 4px;
+    letter-spacing: 0.03em;
+}
+
+.message.user .message-meta {
+    align-self: flex-end;
+}
+
+.message-content {
+    padding: 16px 22px;
+    font-size: 0.93rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+}
+
+/* Bubble Bot */
+.message.bot .message-content {
+    background: var(--surface-solid);
+    color: var(--ink-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px var(--radius-md) var(--radius-md) var(--radius-md);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Bubble User */
+.message.user .message-content {
+    background: linear-gradient(135deg, #2b2b33, #1e1e24);
+    color: #ffffff;
+    border: 1px solid rgba(223, 177, 91, 0.2);
+    border-radius: var(--radius-md) 6px var(--radius-md) var(--radius-md);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.message-content strong {
+    font-weight: 600;
+    color: var(--accent-gold);
+}
+
+.message-content code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.85em;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-subtle);
+    padding: 2px 6px;
+    border-radius: 6px;
+    color: #e2e2e9;
+}
+
+/* Tombol Salin */
+.copy-btn {
+    align-self: flex-start;
+    margin-top: 6px;
+    padding: 4px 10px;
+    font-family: inherit;
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.copy-btn:hover {
+    color: var(--accent-gold);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* ===== Quick Prompts (Chip Pilihan) ===== */
+.quick-prompts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: -4px;
+}
+
+.prompt-chip {
+    padding: 10px 18px;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--ink-secondary);
+    background: var(--surface-solid);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prompt-chip:hover {
+    color: var(--ink-primary);
+    border-color: var(--border-gold);
+    background: var(--accent-gold-glow);
+    transform: translateY(-2px);
+}
+
+/* Indikator Mengetik Mewah (Titik Emas Berdenyut) */
+.message.bot .message-content:empty {
+    min-width: 72px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message.bot .message-content:empty::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--accent-gold);
+    box-shadow: 14px 0 0 rgba(223, 177, 91, 0.3), -14px 0 0 rgba(223, 177, 91, 0.3);
+    animation: pulseGold 1.2s infinite ease-in-out;
+}
+
+/* ===== Form Input Modern ===== */
+.chat-form {
+    padding: 20px 30px 26px;
+    background: rgba(18, 18, 22, 0.5);
+    border-top: 1px solid var(--border-subtle);
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 6px 6px 22px;
+    background: var(--surface-solid);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.25s ease;
+}
+
+.input-wrapper:focus-within {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 20px var(--accent-gold-glow);
+}
+
+.chat-form input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    color: var(--ink-primary);
+    font-family: inherit;
+    font-size: 0.93rem;
+    outline: none;
+}
+
+.chat-form input::placeholder {
+    color: var(--ink-muted);
+}
+
+.chat-form input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.chat-form button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #e2be75, #c29949);
+    color: #121214;
+    border: none;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 15px rgba(223, 177, 91, 0.2);
+}
+
+.chat-form button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #ecd08c, #d0a451);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(223, 177, 91, 0.35);
+}
+
+.chat-form button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.chat-form button:disabled {
+    background: #333338;
+    color: var(--ink-muted);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* ===== Animasi ===== */
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseGold {
+    0%, 100% {
+        background-color: var(--accent-gold);
+        box-shadow: 14px 0 0 rgba(223, 177, 91, 0.2), -14px 0 0 rgba(223, 177, 91, 0.2);
+    }
+    50% {
+        background-color: rgba(223, 177, 91, 0.3);
+        box-shadow: 14px 0 0 var(--accent-gold), -14px 0 0 rgba(223, 177, 91, 0.3);
+    }
+}
+
+/* ===== Responsif Mobile ===== */
+@media (max-width: 640px) {
+    body {
+        padding: 0;
+    }
+
+    .chat-container {
+        max-width: 100%;
+        max-height: none;
+        border-radius: 0;
+        border: none;
+    }
+
+    .chat-header {
+        padding: 18px 20px;
+    }
+
+    .chat-box {
+        padding: 20px 16px;
+    }
+
+    .message {
+        max-width: 90%;
+    }
+
+    .chat-form {
+        padding: 16px 16px 20px;
+    }
+
+    .btn-text {
+        display: none;
+    }
+
+    .chat-form button {
+        padding: 12px 16px;
+    }
+}
