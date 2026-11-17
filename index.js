@@ -87,11 +87,28 @@ app.post("/api/chat", async (req, res) => {
                     const json = JSON.parse(data);
                     const content = json.choices[0].delta?.content;
                     if (content) {
-                        res.write('data: $(JSON.stringify(content))\n\n');
+                        res.write(`data: ${JSON.stringify(content)}\n\n`);
                     }
                 } catch (err) {
                     console.error("gagal parsing streaming data:", error);
                 }
         }
     }
-    
+    res.write("data: [DONE]\n\n");
+    res.end();
+
+    } catch (error) {
+        console.error("Terjadi kesalahan:", error);
+        if(!res.headersSent) {
+            res.status(500).json({ error: "Terjadi kesalahan pada server" });
+        } else {
+            res.write(`data: ${JSON.stringify("terjadi kesalahan pada server")}\n\n`);
+            res.end();
+        }
+    }
+});
+
+app.listen(port, () => {
+    console.log(`Server berjalan di http://localhost:${port}`);
+});
+
